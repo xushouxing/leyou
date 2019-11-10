@@ -1,0 +1,38 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: ly-search
+  jackson:
+      default-property-inclusion: non_null # 配置json处理时忽略空值
+  rabbitmq:
+    host: 192.168.1.100
+    username: guest
+    password: guest
+    virtual-host: /
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 192.168.47.128:9300
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+      lease-renewal-interval-in-seconds: 5 # 5秒钟发送一次心跳
+      lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
+feign:
+  hystrix:
+    enabled: true # 开启Feign的熔断功能
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 9000 # 设置hystrix的超时时间为6000ms
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 3000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
